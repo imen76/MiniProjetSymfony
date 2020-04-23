@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %} Bonjour {{controller_name }}! {% endblock %}
+
+{% block body %}
+<div class="container">
+<ul class="list-group">
+  <li class="list-group-item disabled" aria-disabled="true">liste des livres </li>
+  <img src="images/Livre.jpg" alt="">
+  <li class="list-group-item">
+  <a href={{path('affiche_article')}} class="btn btn-primary">Informatique </a>
+  </li>
+  <li class="list-group-item">Sport</li>
+  <li class="list-group-item">Science</li>
+  <li class="list-group-item">Cuisine</li>
+</ul>
+
+</div>
+{% endblock %}

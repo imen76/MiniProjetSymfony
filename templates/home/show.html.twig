@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <livre>
+        <h2>{{ livre.titre }} </h2>
+       <div class="metadata"> ce livre appartient à la catégorie {{livre.catégorie.titre}}</div>
+       <div class="content">
+       <img src="{{livre.image}}" alt="">
+       </div>
+   </livre>
+
+{% endblock %}
+
