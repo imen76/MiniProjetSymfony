@@ -48,8 +48,14 @@
   </div>
 </nav>
         <div class="container">
-        {% block body %}{% endblock %}
+            <div class="row">
+                <div class="col-sm-8">
+                       {% block body %}
+                       {% endblock %}
+                </div>
+            </div>
+   
         </div>
         {% block javascripts %}{% endblock %}
-    </body>
+</body>
 </html>

@@ -37,10 +37,12 @@ class Livre
     private $Prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\categorie", inversedBy="livres")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="livres")
      * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
+
+   
 
     public function getId(): ?int
     {
@@ -95,15 +97,17 @@ class Livre
         return $this;
     }
 
-    public function getCategorie(): ?categorie
+    public function getCategorie(): ?Categorie
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?categorie $categorie): self
+    public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
 
         return $this;
     }
+
+  
 }
