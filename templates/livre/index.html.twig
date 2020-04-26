@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Livre index{% endblock %}
+{% block title %}Livre {% endblock %}
 
 {% block body %}
-    <h1>Livre index</h1>
+    <h1>Liste des Livres</h1>
 
     <table class="table table-bordered">
         <thead>
@@ -27,6 +27,8 @@
                 <td>{{ livre.categorie.nom }}</td>
                 <td>
                     <a href="{{ path('livre_show', {'id': livre.id}) }}">show</a>
+                </td>
+                <td>    
                     <a href="{{ path('livre_edit', {'id': livre.id}) }}">edit</a>
                 </td>
             </tr>
