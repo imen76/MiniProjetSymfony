@@ -91,4 +91,15 @@ class CategorieController extends AbstractController
 
         return $this->redirectToRoute('categorie_index');
     }
+
+    /**
+     * @Route("/showCat", name="showCat", methods={"GET"})
+     */
+    public function showCat(CategorieRepository $categorieRepository): Response
+    {
+        
+        return $this->render('base1.html.twig', [
+            'categories' => $categorieRepository->findAll(),
+        ]);
+    }
 }

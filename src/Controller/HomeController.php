@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,9 +43,18 @@ class HomeController extends AbstractController
      */
     public function affiche()
     {
-        return $this->render('home/affiche_article.html.twig', [
+        $categorie =   $this->getDoctrine()
+                            ->getRepository('App:Categorie')
+                            ->getNomCategorie();
+
+        $stringCategorie = implode("|",$categorie);
+        echo "he".$stringCategorie;
+        return new Response("hello categorie ".$stringCategorie);
+        /*return $this->render('home/affiche_article.html.twig', [
             'controller_name' => 'HomeController',
-        ]);
+        ]);*/
     }
+
+    
 
 }

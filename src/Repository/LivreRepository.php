@@ -19,6 +19,12 @@ class LivreRepository extends ServiceEntityRepository
         parent::__construct($registry, Livre::class);
     }
 
+    public function getNomCategorie($nomCategorie){
+        return $this->getEntityManager()
+                    ->createQuery("SELECT * FROM App:Livre l where l.categorie.nom = '$nomCategorie'")
+                    ->getResult();
+    }
+
     // /**
     //  * @return Livre[] Returns an array of Livre objects
     //  */
