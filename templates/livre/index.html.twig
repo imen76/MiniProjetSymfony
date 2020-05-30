@@ -1,6 +1,3 @@
-{% extends 'base1.html.twig' %}
-
-{% block title %}Livre {% endblock %}
 
 {% block body %}
     <h1>Liste des Livres</h1>
@@ -20,7 +17,7 @@
         {% for livre in livres %}
             <tr>
                 <td>{{ livre.id }}</td>
-                <td>{{ livre.image }}</td>
+                <td><a href="{{ asset('images/' ~ livre.image)}}"> {{ livre.image }}</a></td>
                 <td>{{ livre.Titre }}</td>
                 <td>{{ livre.Description }}</td>
                 <td>{{ livre.Prix }}</td>

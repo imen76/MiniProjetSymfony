@@ -21,7 +21,7 @@ class LivreController extends AbstractController
 
     /**
      * 
-     * @Route("/", name="livre_index", methods={"GET"})
+     * @Route("/index", name="livre_index", methods={"GET"})
      */
     public function index(LivreRepository $livreRepository,CategorieRepository $categorieRepository): Response
     {
@@ -58,12 +58,31 @@ class LivreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $imagebook =$form->get('image')->getData();
+            var_dump($imagebook);
+
+            if($imagebook){
+                $origineimage= pathinfo($imagebook->getClientOriginalName(), PATHINFO_FILENAME); 
+                
+                $image=$origineimage . '-' . uniqid()  . '.' . $imagebook-> guessExtension();        
+            
+             try {
+                $imagebook->move(
+                    $this->getParameter('image_directory'),
+                    $image
+                );
+                } catch (FileException $e) {
+                //throw $th;
+                }
+                $livre->setImage($image);    
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($livre);
             $entityManager->flush();
 
             return $this->redirectToRoute('livre_index');
-        }
+     }
 
         return $this->render('livre/new.html.twig', [
             'livre' => $livre,
@@ -71,6 +90,7 @@ class LivreController extends AbstractController
             'categories' => $categorieRepository->findAll(),
         ]);
     }
+
 
     /**
      * @Route("/{id}", name="livre_show", methods={"GET"})

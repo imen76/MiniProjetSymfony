@@ -2,27 +2,21 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\route;
 use App\Entity\Categorie;
 use App\Form\CategorieType;
 use App\Repository\CategorieRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
-
-
-class HomeController extends AbstractController
+class IndexController extends AbstractController
 {
     /**
      * @Route("/", name="categorie_home", methods={"GET"})
      */
     public function index(CategorieRepository $categorieRepository): Response
     {
-        return $this->render('categorie/index.html.twig', [
+        return $this->render('index/index.html.twig', [
             'categories' => $categorieRepository->findAll(),
         ]);
     }
-    
-
 }
