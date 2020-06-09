@@ -3,36 +3,17 @@
 {% block title %}Livre{% endblock %}
 
 {% block body %}
-    <h1>{{ livre.Titre }}</h1>
+  
+      
+          <h1>{{ livre.Titre }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ livre.id }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td><img src="{{asset('images/templatemo_image_01.jpg')}}" alt="image" /></td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ livre.Titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ livre.Description }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ livre.Prix }}</td>
-            </tr>
-        </tbody>
-    </table>
+          <div><img src="{{ asset('images/' ~ livre.image)}}" alt="image"
+                       style="width:100 px; height:125px;"/></div>
+          <div> {{ livre.Description }} </div>
    
-    <a href="{{ path('livre_index') }}">back to list</a>
 
-    <a href="{{ path('livre_edit', {'id': livre.id}) }}">edit</a>
 
-    {{ include('livre/_delete_form.html.twig') }}
+    <div class="buy_now_button"><a href="#">Buy Now</a></div>
+
+    
 {% endblock %}

@@ -16,6 +16,19 @@ body {
 	background: #4b4743;
 }
 
+#id_table{
+	color: #FFFFFF;
+}
+
+#id_h1{
+	font-size: 15px;
+	color: #cbc750;
+	padding: 0 0 5px 0;
+	margin: 0 0 10px 0;
+	border-bottom: 1px dotted #cbc750;
+	background: url(images/templatemo_h1_bg.jpg);
+}
+
 a:link, a:visited { color: #e6e154; text-decoration: none; font-weight: bold;} 
 a:active, a:hover { color: #e6e154; text-decoration: underline;}
 
@@ -165,6 +178,8 @@ img {
 	 margin: 0 0 10px 0;
 	 padding: 0 0 0 20px;
 }
+
+
 
 #templatemo_new_books li {
 	 margin: 0;

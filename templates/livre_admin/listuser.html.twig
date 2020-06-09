@@ -3,44 +3,33 @@
 {% block title %}Livre {% endblock %}
 
 {% block body %}  
-        <h1>Liste des Livres</h1>
+        <div id="templatemo_content_right">
+            {% for i in livres %}
+            
+        	     <div class="templatemo_product_box">
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <td>Id</td>
-                <td>Image</td>
-                <td>Titre</td>
-                <td>Description</td>
-                <td>Prix</td>
-                <td>Categorie</td>
-            </tr>
-        </thead>
-        <tbody>
-        {% for livre in livres %}
-            <tr>
-                <td>{{ livre.id }}</td>
-                <td>{{ livre.image }}</td>
-                <td>{{ livre.Titre }}</td>
-                <td>{{ livre.Description }}</td>
-                <td>{{ livre.Prix }}</td>
-                <td>{{ livre.categorie.nom }}</td>
-                <td>
-                    <a href="{{ path('livre_show', {'id': livre.id}) }}">show</a>
-                </td>
-                <td>    
-                    <a href="{{ path('livre_edit', {'id': livre.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('livre_new') }}">Create new</a>
+                     {% for livre in livres %}
+                 
+                     <h1>{{ livre.Titre }}</h1>
+                    
+                     {% endfor %}
+   	                 <img src="{{asset('images/templatemo_image_01.jpg')}}" alt="image" />
+                     <div class="product_info">
+                	     <p>How to Shoot Great Photographs with Any Camera...</p>
+                  
+                          <div class="buy_now_button"><a href="subpage.html">Buy Now</a></div>
+                         <div class="detail_button"><a href="/showuser">Detail</a></div>
+      sliding              
+                     </div>
+                     <div class="cleaner">&nbsp;</div>
+                 </div>
+            
+                 <div class="cleaner_with_width">&nbsp;</div>
+            {% endfor %}
+            <div class="cleaner_with_width">&nbsp;</div>
+        </div>   
+          
+            
              <!--<div class="templatemo_product_box">
             	<h1>Cooking  <span>(by Suneeta Vaswani)</span></h1>
        	     <img src="{{asset('images/templatemo_image_02.jpg')}}" alt="image" />

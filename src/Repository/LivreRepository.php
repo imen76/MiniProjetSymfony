@@ -15,21 +15,42 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 class LivreRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
-    {
+   {
         parent::__construct($registry, Livre::class);
     }
 
-    public function getNomCategorie($nomCategorie){
-        return $this->getEntityManager()
-                    ->createQuery("SELECT * FROM App:Livre l where l.categorie.nom = '$nomCategorie'")
-                    ->getResult();
-    }
 
-    // /**
-    //  * @return Livre[] Returns an array of Livre objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getLivres($Categorie_id= null)
+    {
+        
+        $qb = $this->createQueryBuilder('l');
+             
+        if($categorie_id) 
+        {
+            $qb->andWhere('l.categorie = :categorie_id ')
+                ->setParameter('categorie_id', $categorie_id);
+        }
+ 
+        $query = $qb->getQuery();
+ 
+        return $query->getResult();
+    
+    }
+}
+
+
+     /**
+      * @return Query
+      */
+
+     /*public function findAllQuery():Query
+     {
+         return $this->findAllQuery()
+              ->getQuery();
+     } 
+       
+    
+    /*public function findByExampleField($value)
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')
@@ -40,17 +61,20 @@ class LivreRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Livre
-    {
+        
+   // public function findOneBySomeField($value): ?Livre
+    /*{
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
-    }
-    */
+    }/*
+
+    public function getNomCategorie($nomCategorie){
+       return $this->getEntityManager()
+                    ->createQuery("SELECT * FROM App:Livre l where l.categorie.nom = '$nomCategorie'")
+                    ->getResult();}
+    
 }

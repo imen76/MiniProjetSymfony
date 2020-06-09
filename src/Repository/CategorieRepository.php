@@ -18,9 +18,16 @@ class CategorieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Categorie::class);
     }
-
-    
-
+    public function getWithLivres()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->leftJoin('c.lives', 'l')
+            ->addSelect('l')
+            ->getQuery();
+ 
+        return $query->getResult();
+    }    
+  
     // /**
     //  * @return Categorie[] Returns an array of Categorie objects
     //  */
@@ -49,4 +56,5 @@ class CategorieRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

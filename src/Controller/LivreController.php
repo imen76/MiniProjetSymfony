@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/livre")
@@ -21,13 +23,24 @@ class LivreController extends AbstractController
 
     /**
      * 
-     * @Route("/index", name="livre_index", methods={"GET"})
+     * @Route("/", name="livre_index", methods={"GET"})
      */
-    public function index(LivreRepository $livreRepository,CategorieRepository $categorieRepository): Response
+    public function index(Request $request,LivreRepository $livreRepository,CategorieRepository $categorieRepository,PaginatorInterface $paginator): Response
     {
+        $livre = new Livre();
+
+        $donnees = $this->getDoctrine()->getRepository(Livre::class)->findAll();
+
+        $livre = $paginator->paginate(
+
+            $donnees,//passer les livres
+            $request->query->getInt('page',1),
+            6
+        );
         return $this->render('livre/index.html.twig', [
-            'livres' => $livreRepository->findAll(),
+            'livres' => $livre,
             'categories' => $categorieRepository->findAll(),
+
         ]);
     }
 
@@ -35,17 +48,13 @@ class LivreController extends AbstractController
      * @Route("/list", name="livre_list", methods={"GET"})
      */
     public function list(LivreRepository $livreRepository,CategorieRepository $categorieRepository): Response
-    {
-        /*$livre = $this->getDoctrine()
-                      ->getRepository()
-                      ->showLivreByCategorie("informatique");   */
-
-        return new Response("Hello");
-
-        /*return $this->render('livre/listuser.html.twig', [
-            'livres' => $livreRepository->findAll(),
-            'categories' => $categorieRepository->findAll(),
-        ]);*/
+    {        
+           
+            return $this->render('livre/listuser.html.twig', [
+                'livres' => $livreRepository->findAll(),
+                'categories' => $categorieRepository->findAll(),
+                
+        ]);
     }
 
     /**
@@ -139,19 +148,54 @@ class LivreController extends AbstractController
     }
 
     /**
-     * @Route("/showLivreByCategorie", name="showLivreByCategorie")
+     * @Route("/showLivreByCategorie/{id}", name="showLivreByCategorie")
      */
     public function showLivreByCategorie(Request $request, CategorieRepository $categorieRepository): Response
     {
         /*$livre = $this->getDoctrine()
                       ->getRepository()
-                      ->showLivreByCategorie("informatique");*/
+                      ->showLivreByCategorie("informatique");
         
         return $this->render('livre/show.html.twig', [
             'livre' => $livre,
             'form' => $form->createView(),
             'categories' => $categorieRepository->findAll(),
+        ]);*/
+        
+        $livre = new Livre();
+        $categories = new Categorie();
+
+        $livres = $this->getDoctrine()->getRepository(Categorie::class);
+                       
+
+
+        return $this->render('/livre/show.html.twig',[
+                'livres' => $livres,
+              'categorie' => $categorieRepository->findAll() 
+            ]);
+                      
+    }
+    /**
+     * @Route("/menu/{id}", name="menu")
+     */
+    public function menu(Categorie $id){
+ 
+        $categories = $this->getDoctrine()->getRepository(Livre::class)->findBy([
+         'categorie'=>$id
+         
         ]);
+        die (var_dump ($categories));
+     
+        $categories = $em->getRepository(Categorie::class)->getWithLivres();
+     
+        foreach($categories as $categorie)
+        {
+            $categorie->setLivres($em->getRepository(Livre::class)->getLivres($categorie->getId()));
+        }
+     
+        return $this->render('livre_show.html.twig', array(
+            'categories' => $categories
+        ));
     }
 
 }

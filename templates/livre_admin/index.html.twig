@@ -9,13 +9,13 @@
            
             <div class="templatemo_product_box">
             	 <h1 id="id_h1">{{ livre.Titre }} </h1>
-   	                 <img src="{{ asset('images/' ~ livre.image)}}" alt="image"
-                       style="width:100 px; height:125px;"/>
-                     <div class="product_info">
-                         <h3>{{ livre.Prix }} Dt</h3>
-                         <div class="buy_now_button"><a href="#">Buy Now</a></div>
-                         <div class="detail_button"><a href="{{ path('livre_show', {'id': livre.id}) }}">Detail</a></div>
-                     </div>
+   	                <img src="{{ asset('images/' ~ livre.image)}}" alt="image"
+                       style="width:100 px; height:100px;"/>
+                <div class="product_info">
+                  <h3>{{ livre.Prix }} Dt</h3>
+                    <div class="buy_now_button"><a href="#">Buy Now</a></div>
+                    <div class="detail_button"><a href="{{ path('livre_show', {'id': livre.id}) }}">Detail</a></div>
+                </div>
                
             </div>            
         {% else %}

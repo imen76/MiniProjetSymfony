@@ -24,9 +24,9 @@ class LivreFixtures extends Fixture
      //créer entre 4 et 6 livres  
     for($j =1; $j <= 4; $j++){
         $livre = new Livre();
-        $livre->setImage($faker->imageUrl())
+        $livre->setImage($faker->imageUrl($width = 120, $height = 120))
               ->setTitre($faker->sentence())
-              ->setDescription("description du livre n°$j")
+              ->setDescription($faker->words(100,$asText=true))
               ->setPrix($faker->randomNumber(2))
               ->setCategorie($categorie);
               $manager->persist($livre); 

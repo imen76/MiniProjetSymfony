@@ -1,5 +1,5 @@
 
-{% extends 'base1.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block title %}New Livre{% endblock %}
 
 {% block body %}
@@ -9,10 +9,9 @@
 {{include ('livre/_form.html.twig')}}
 
 {{ form_start (form)}}
-
-</div>
+<div class="bg-light">
  <table class="table table-dark">
- <td> </td>
+ 
  
  </table>
   <a href="{{ path('livre_index') }}">back to list</a>

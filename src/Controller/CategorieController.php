@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Livre;
+use App\Repository\LivreRepository;
 use App\Form\CategorieType;
 use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +18,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategorieController extends AbstractController
 {
     /**
-     * @Route("/index", name="categorie_index", methods={"GET"})
+     * @Route("/", name="categorie_index", methods={"GET"})
      */
-    public function index(CategorieRepository $categorieRepository): Response
+    public function index(CategorieRepository $categorieRepository,LivreRepository $livreRepository): Response
     {
-        return $this->render('categorie/index.html.twig', [
+        
+            return $this->render('categorie/index.html.twig', [
             'categories' => $categorieRepository->findAll(),
+            'livres' => $livreRepository->findAll(),
         ]);
     }
 
