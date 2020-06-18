@@ -26,7 +26,7 @@ class LivreFixtures extends Fixture
         $livre = new Livre();
         $livre->setImage($faker->imageUrl($width = 120, $height = 120))
               ->setTitre($faker->sentence())
-              ->setDescription($faker->words(100,$asText=true))
+              ->setDescription($faker->words(10,$asText=true))
               ->setPrix($faker->randomNumber(2))
               ->setCategorie($categorie);
               $manager->persist($livre); 

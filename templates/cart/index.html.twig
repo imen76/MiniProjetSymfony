@@ -1,0 +1,49 @@
+{% extends 'baselist.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+<h1 >Votre panier !✅</h1>
+
+
+  {% if items | length > 0 %}
+     <table class="table table-bordered" >
+      <thead id="id_h1" height="35px" padding: 10px;>
+         <tr>
+            <th>livre </th>
+            <th> Prix</th>
+            <th> Quantité</th>
+            <th> Total</th>
+            <th> </th>
+         </tr>
+     </thead> 
+     <tbody>
+     
+     
+         {% for key,item in items %}
+           <tr>
+               <td>{{ item['livre'].titre}}</td>
+               <td>{{ item['livre'].prix}}</td>
+               <td >{{ item['quantity']}}</td>
+               <td>{{item['livre'].prix * item['quantity']}}</td>
+               <td>
+                   <a href="#" class="btn btn-danger btn-sm">
+                       <i class="fas fa-trash"></i>
+                   </a>
+
+               </td>
+           </tr>    
+         {% endfor %}
+      </tbody>
+      <tfoot>
+          <tr id="id_h1" height="35px" padding: 10px;>
+              <td colspan="3" class="text-right">Total : </td>
+              <td>{{ total }}DT</td>
+          </tr>    
+      </tfoot>    
+     </table>
+      {% else %}        
+     <p> Surprise, c'est vide ! </p>
+ {% endif %}
+
+{% endblock %}

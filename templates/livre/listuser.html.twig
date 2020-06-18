@@ -5,24 +5,25 @@
 {% block body %}  
         <h1>Liste des Livres</h1>
 
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered" >
+        <thead id="id_h1" height="35px" padding: 10px;> 
             <tr>
-                <td>Id</td>
-                <td>Image</td>
-                <td>Titre</td>
-                <td>Description</td>
-                <td>Prix</td>
-                <td>Categorie</td>
+                <th>Id</th>
+                <th>Image</th>
+                <th>Titre</th>
+              
+                <th>Prix</th>
+                <th>Categorie</th>
             </tr>
         </thead>
         <tbody>
         {% for livre in livres %}
             <tr>
                 <td>{{ livre.id }}</td>
-                <td>{{ livre.image }}</td>
+                <td>  <img src="{{ asset('images/' ~ livre.image)}}" alt="image"
+                       style="width:100 px; height:100px;"/></td>
                 <td>{{ livre.Titre }}</td>
-                <td>{{ livre.Description }}</td>
+             
                 <td>{{ livre.Prix }}</td>
                 <td>{{ livre.categorie.nom }}</td>
                 <td>

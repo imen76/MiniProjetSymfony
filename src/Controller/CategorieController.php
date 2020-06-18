@@ -23,16 +23,18 @@ class CategorieController extends AbstractController
     public function index(CategorieRepository $categorieRepository,LivreRepository $livreRepository): Response
     {
         
+
             return $this->render('categorie/index.html.twig', [
-            'categories' => $categorieRepository->findAll(),
+            'liste_categories' => $categorieRepository->findAll(),
             'livres' => $livreRepository->findAll(),
+            'categories' => $categorieRepository->findAll()
         ]);
     }
 
     /**
      * @Route("/new", name="categorie_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,CategorieRepository $categorieRepository): Response
     {
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
@@ -48,6 +50,7 @@ class CategorieController extends AbstractController
 
         return $this->render('categorie/new.html.twig', [
             'categorie' => $categorie,
+            'categories' => $categorieRepository->findAll(),
             'form' => $form->createView(),
         ]);
     }
@@ -55,17 +58,18 @@ class CategorieController extends AbstractController
     /**
      * @Route("/{id}", name="categorie_show", methods={"GET"})
      */
-    public function show(Categorie $categorie): Response
+    public function show(Categorie $categorie,CategorieRepository $categorieRepository): Response
     {
         return $this->render('categorie/show.html.twig', [
             'categorie' => $categorie,
+            'categories' => $categorieRepository->findAll()
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="categorie_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Categorie $categorie): Response
+    public function edit(Request $request, Categorie $categorie,CategorieRepository $categorieRepository): Response
     {
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
@@ -79,6 +83,7 @@ class CategorieController extends AbstractController
         return $this->render('categorie/edit.html.twig', [
             'categorie' => $categorie,
             'form' => $form->createView(),
+            'categories' => $categorieRepository->findAll()
         ]);
     }
 

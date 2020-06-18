@@ -150,7 +150,7 @@ class LivreController extends AbstractController
     /**
      * @Route("/showLivreByCategorie/{id}", name="showLivreByCategorie")
      */
-    public function showLivreByCategorie(Request $request, CategorieRepository $categorieRepository): Response
+    public function showLivreByCategorie(Request $request, CategorieRepository $categorieRepository,Categorie $id): Response
     {
         /*$livre = $this->getDoctrine()
                       ->getRepository()
@@ -161,41 +161,41 @@ class LivreController extends AbstractController
             'form' => $form->createView(),
             'categories' => $categorieRepository->findAll(),
         ]);*/
-        
-        $livre = new Livre();
-        $categories = new Categorie();
+        $livres = $this->getDoctrine()->getRepository(Livre::class)->findBy(['categorie'=>$id]);        
 
-        $livres = $this->getDoctrine()->getRepository(Categorie::class);
-                       
-
-
-        return $this->render('/livre/show.html.twig',[
-                'livres' => $livres,
-              'categorie' => $categorieRepository->findAll() 
+        return $this->render('/livre/showLivreByCategorie.html.twig',[
+              'livres' => $livres,
+              'categories' => $categorieRepository->findAll() ,
+               'categorie' =>$id
             ]);
-                      
+                   
     }
+      /**
+      * @Route("/livre_categorie/{id}", name="livre_categorie")
+      */
+      public function livre_categorie(Categorie $id,CategorieRepository $categorieRepository,PaginatorInterface $paginator){
+  
+        $livres = $this->getDoctrine()->getRepository(Livre::class)->findBy(['categorie'=>$id]);
+     
+        return $this->render('livre/index.html.twig', [
+            'livres' => $livres,
+            'categories' => $categorieRepository->findAll(),
+
+        ]);
+     }
     /**
      * @Route("/menu/{id}", name="menu")
      */
     public function menu(Categorie $id){
  
-        $categories = $this->getDoctrine()->getRepository(Livre::class)->findBy([
-         'categorie'=>$id
+        // $livres = $this->getDoctrine()->getRepository(Livre::class)->findBy(['categorie'=>$id]);
+        $categories=$categorieRepository()->findAll();
          
-        ]);
-        die (var_dump ($categories));
-     
-        $categories = $em->getRepository(Categorie::class)->getWithLivres();
-     
-        foreach($categories as $categorie)
-        {
-            $categorie->setLivres($em->getRepository(Livre::class)->getLivres($categorie->getId()));
-        }
-     
-        return $this->render('livre_show.html.twig', array(
-            'categories' => $categories
-        ));
-    }
+        
+         return $this->render('/base1.html.twig', array(
+             'categories' => $categories
+         ));
+     }
+       
 
 }
